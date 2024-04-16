@@ -1,0 +1,38 @@
+/**
+https://leetcode.com/explore/learn/card/recursion-i/250/principle-of-recursion/1440/
+
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+ 
+
+Example 1:
+
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+**/
+
+
+
+class Solution {
+    public void reverseString(char[] s) {
+     
+      reverseCharacters(s,0,s.length-1);
+        System.out.println(s);
+
+    }
+    
+    private static void reverseCharacters(char[] s, int start, int end){
+        
+        if(start>=end) return;
+        
+        char temp =s[end];
+        s[end]=s[start];
+        s[start]=temp;
+        
+        reverseCharacters(s,start+1,end-1);
+        
+    }
+    
+}
