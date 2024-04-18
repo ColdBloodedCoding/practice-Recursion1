@@ -1,0 +1,70 @@
+/**
+https://leetcode.com/explore/learn/card/recursion-i/255/recursion-memoization/1661
+
+he Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+
+F(0) = 0, F(1) = 1
+F(n) = F(n - 1) + F(n - 2), for n > 1.
+Given n, calculate F(n).
+
+ 
+
+Example 1:
+
+Input: n = 2
+Output: 1
+Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+
+**/
+
+
+/** Below solution does not do memoization when calls are repeated, so to reduce time complexity from 2^n, we do memoization
+Time complexity: O(2^n)- since T(n) = T(n-1) + T(n-2)is an exponential time
+Space complexity: O(n) - space for recursive function call stack
+
+
+class Solution {
+    public int fib(int n) {
+        
+        if(n==0 || n==1) return n;
+        
+        int f1=fib(n-1);
+        int f2=fib(n-2);
+
+        return (f1+f2);
+     
+    }
+}
+
+**/
+
+// Below solution does memoization
+class Solution {
+
+public int fib(int n) {
+    return fibMemo(n, new int[n+1]);
+ 
+}
+
+private static int fibMemo(int n, int arr[]){
+    if(n==0 || n==1) return n;
+
+    //Check the memoized value in array, if present return same instead of repitition
+    if(arr[n]!=0){
+        return arr[n];
+    } 
+    
+    int f1=fibMemo(n-1,arr);
+    int f2=fibMemo(n-2,arr);
+    
+    int sum =f1+f2;
+    
+    // What if arr[n] for a particular iteration is null, then we store/memoize the sum in it  
+    arr[n] =sum;
+    
+    return sum;
+
+  }
+}
+
+    
