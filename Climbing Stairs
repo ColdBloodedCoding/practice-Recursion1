@@ -1,0 +1,43 @@
+/**
+https://leetcode.com/explore/learn/card/recursion-i/255/recursion-memoization/1662/
+
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Example 1:
+
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+
+
+**/
+
+class Solution {
+    public int climbStairs(int n) {
+        return climbNStairs(n, new int[n+1]);
+    }
+    
+    private static int climbNStairs(int n, int arr[]) {
+        
+         if(n==0 || n==1 || n==2) return n;
+
+        if(arr[n]!=0){
+            return arr[n];
+        }
+        
+        
+        int s1= climbNStairs(n-1,arr);
+        int s2= climbNStairs(n-2,arr);
+        
+        int totalStep =s1+s2;
+        
+        arr[n]=totalStep;
+        
+        return totalStep;
+        
+    }
+}
